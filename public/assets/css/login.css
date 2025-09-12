@@ -1,0 +1,43 @@
+.animate-fadeInSlow {
+  animation: fadeInSlow 1.2s ease-out forwards;
+}
+
+.btn-gradient {
+  background: linear-gradient(to right, #289A00, #89A10C);
+  opacity: 0.95;
+}
+
+.dropdown-animation {
+  transition: all 0.3s ease-in-out;
+  transform-origin: top;
+  transform: scaleY(0);
+  opacity: 0;
+  display: block;
+}
+
+.dropdown-show {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+@keyframes fadeInSlow {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+
