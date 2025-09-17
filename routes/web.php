@@ -54,15 +54,24 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/ajax/brands', [MasterdataController::class, 'getBrandsBySize'])->name('ajax.getBrandsBySize');
     Route::post('/ajax/supplier', [MasterdataController::class, 'getSupplierBySizeBrand'])->name('ajax.getSupplierBySizeBrand');
 
-    // Vehicle management routes
-    Route::get('/vehicledashboard', [MasterdataController::class, 'showVehicleData'])->name('vehicledashboard');
-    Route::post('/vehicledashboard', [MasterdataController::class, 'storeVehicle'])->name('vehicle.store');
-    Route::delete('/vehicledashboard/{id}', [MasterdataController::class, 'destroyVehicle'])->name('vehicle.destroy');
+// Vehicle management routes
+Route::get('/vehicledashboard', [MasterdataController::class, 'showVehicleData'])->name('vehicledashboard');
+Route::post('/vehicledashboard', [MasterdataController::class, 'storeVehicle'])->name('vehicle.store');
+Route::delete('/vehicledashboard/{id}', [MasterdataController::class, 'destroyVehicle'])->name('vehicle.destroy');
 
-    // Supplier management routes
-    Route::get('/supplierdashboard', [MasterdataController::class, 'showSupplierData'])->name('supplierdashboard');
-    Route::post('/supplierdashboard', [MasterdataController::class, 'storeSupplier'])->name('supplier.store');
-    Route::delete('/supplierdashboard/{id}', [MasterdataController::class, 'destroySupplier'])->name('supplier.destroy');
+// Edit + Update vehicle
+Route::get('/vehicledashboard/{id}/edit', [MasterdataController::class, 'editVehicle'])->name('vehicle.edit');
+Route::put('/vehicledashboard/{id}', [MasterdataController::class, 'updateVehicle'])->name('vehicle.update');
+
+
+// Supplier management routes
+// Supplier management routes
+Route::get('/supplierdashboard', [MasterdataController::class, 'showSupplierData'])->name('supplierdashboard');
+Route::post('/supplierdashboard', [MasterdataController::class, 'storeSupplier'])->name('supplier.store');
+Route::delete('/supplierdashboard/{id}', [MasterdataController::class, 'destroySupplier'])->name('supplier.destroy');
+Route::get('/supplierdashboard/{id}/edit', [MasterdataController::class, 'editSupplier'])->name('supplier.edit');
+Route::put('/supplierdashboard/{id}', [MasterdataController::class, 'updateSupplier'])->name('supplier.update');
+
 });
 
 
@@ -106,7 +115,3 @@ Route::middleware(['transport_officer'])->group(function () {
     Route::post('/orders/store/{request_id}', [TireOrderController::class, 'store'])->name('order.store');
     Route::post('/orders/arrived/{order_id}', [TireOrderController::class, 'markArrived'])->name('order.arrived');
 });
-
-
-
-
