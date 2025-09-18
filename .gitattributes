@@ -1,0 +1,7 @@
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Force all blade.php files to use CRLF
+*.blade.php text eol=crlf
+
+# You can add more rules for other file types if needed

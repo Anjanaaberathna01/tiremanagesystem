@@ -65,63 +65,65 @@
           </form>
         </div>
 
-        <!-- Table -->
-        <div class="overflow-x-auto">
-          <table id="supplierTable" class="min-w-full border border-gray-200">
-            <thead>
-              <tr class="text-left text-white bg-blue-800">
-                <th class="px-4 py-2 border">Supplier ID</th>
-                <th class="px-4 py-2 border">Supplier Name</th>
-                <th class="px-4 py-2 border">Tire Size</th>
-                <th class="px-4 py-2 border">Brand</th>
-                <th class="px-4 py-2 border">Address</th>
-                <th class="px-4 py-2 border">Country</th>
-                <th class="px-4 py-2 border">Phone No</th>
-                <th class="px-4 py-2 border">Email</th>
-                <th class="px-4 py-2 border">Comment</th>
-                <th class="px-4 py-2 border text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              @forelse($suppliers as $supplier)
-                <tr class="text-gray-700">
-                  <td class="px-4 py-2 border">{{ $supplier->id }}</td>
-                  <td class="px-4 py-2 border">{{ $supplier->name }}</td>
-                  <td class="px-4 py-2 border">{{ $supplier->tire_size }}</td>
-                  <td class="px-4 py-2 border">{{ $supplier->brand }}</td>
-                  <td class="px-4 py-2 border">{{ $supplier->address }}</td>
-                  <td class="px-4 py-2 border">{{ $supplier->country }}</td>
-                  <td class="px-4 py-2 border">{{ $supplier->phone_number }}</td>
-                  <td class="px-4 py-2 border">{{ $supplier->email }}</td>
-                  <td class="px-4 py-2 border">{{ $supplier->comment }}</td>
-                  <td class="px-4 py-2 border flex justify-center gap-3">
+       <!-- Table -->
+<div class="overflow-x-auto">
+  <table id="supplierTable" class="min-w-full border border-gray-200 table-fixed">
+    <thead>
+      <tr class="text-left text-white bg-blue-800">
+        <th class="px-4 py-2 border">Supplier ID</th>
+        <th class="px-4 py-2 border">Supplier Name</th>
+        <th class="px-4 py-2 border">Tire Size</th>
+        <th class="px-4 py-2 border">Brand</th>
+        <th class="px-4 py-2 border">Address</th>
+        <th class="px-4 py-2 border">Country</th>
+        <th class="px-4 py-2 border">Phone No</th>
+        <th class="px-4 py-2 border">Email</th>
+        <th class="px-4 py-2 border">Comment</th>
+        <th class="px-4 py-2 border text-center w-32">Action</th> <!-- fixed width -->
+      </tr>
+    </thead>
+    <tbody>
+      @forelse($suppliers as $supplier)
+        <tr class="text-gray-700">
+          <td class="px-4 py-2 border">{{ $supplier->id }}</td>
+          <td class="px-4 py-2 border">{{ $supplier->name }}</td>
+          <td class="px-4 py-2 border">{{ $supplier->tire_size }}</td>
+          <td class="px-4 py-2 border">{{ $supplier->brand }}</td>
+          <td class="px-4 py-2 border">{{ $supplier->address }}</td>
+          <td class="px-4 py-2 border">{{ $supplier->country }}</td>
+          <td class="px-4 py-2 border">{{ $supplier->phone_number }}</td>
+          <td class="px-4 py-2 border">{{ $supplier->email }}</td>
+          <td class="px-4 py-2 border">{{ $supplier->comment }}</td>
+          <td class="px-4 py-2 border text-center">
+            <div class="inline-flex items-center space-x-3">
+              <!-- Edit -->
+              <a href="{{ route('supplier.edit', $supplier->id) }}"
+                 class="text-blue-600 hover:text-blue-800" title="Edit Supplier">
+                <i class="fas fa-edit text-lg"></i>
+              </a>
 
-                    <!-- Edit (Font Awesome Pen Icon) -->
-                    <a href="{{ route('supplier.edit', $supplier->id) }}"
-                       class="text-blue-600 hover:text-blue-800" title="Edit Supplier">
-                      <i class="fas fa-edit" style="font-size:24px;"></i>
-                    </a>
-
-                    <!-- Delete (Font Awesome Trash Icon) -->
-                    <form method="POST" action="{{ route('supplier.destroy', $supplier->id) }}"
-                          onsubmit="return confirm('Are you sure you want to delete this supplier?');">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="text-red-600 hover:text-red-800" title="Delete Supplier">
-                        <i class="fas fa-trash" style="font-size:24px;"></i>
-                      </button>
-                    </form>
-
-                  </td>
-                </tr>
-              @empty
-                <tr>
-                  <td colspan="10" class="py-4 text-center">No suppliers found.</td>
-                </tr>
-              @endforelse
-            </tbody>
-          </table>
-        </div>
+              <!-- Delete -->
+              <form method="POST" action="{{ route('supplier.destroy', $supplier->id) }}"
+                    onsubmit="return confirm('Are you sure you want to delete this supplier?');"
+                    class="inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-600 hover:text-red-800" title="Delete Supplier">
+                  <i class="fas fa-trash text-lg"></i>
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      @empty
+        <tr>
+          <td colspan="10" class="py-4 text-center">No suppliers found.</td>
+        </tr>
+      @endforelse
+    </tbody>
+  </table>
+</div>
+        <!-- End Table -->
       </div>
     </div>
   </div>
