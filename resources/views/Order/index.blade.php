@@ -50,13 +50,14 @@
                             <th class="px-4 py-2 border">Ordered At</th>
                             <th class="px-4 py-2 border">Arrived At</th>
                             <th class="px-4 py-2 border">Action</th>
+                            <th class="px-4 py-2 border">Receipt</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($orders as $order)
                             <tr>
-                            <td class="px-4 py-2 border">{{ $order->request->request_code }}</td>
-                            <td class="px-4 py-2 border">{{ $order->request->vehicle->vehicle_number }}</td>
+                            <td class="px-4 py-2 border">{{ $order->tireRequest->request_code ?? '-' }}</td>
+                            <td class="px-4 py-2 border">{{ $order->tireRequest->vehicle->vehicle_number ?? '-' }}</td>
                             <td class="px-4 py-2 border">{{ $order->supplier->name }}</td>
                             <td class="px-4 py-2 border">
                                 @if($order->order_status == 'ordered')
@@ -78,6 +79,9 @@
                                 @else
                                 <span class="font-bold text-green-700">Completed</span>
                                 @endif
+                            </td>
+                            <td class="px-4 py-2 border">
+                                <a href="{{ route('tirereceipt.view', ['order_id' => $order->id]) }}" class="text-blue-700 underline">View Receipt</a>
                             </td>
                             </tr>
                             @endforeach

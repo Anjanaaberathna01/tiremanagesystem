@@ -25,7 +25,7 @@
             <img src="https://img.icons8.com/?size=100&id=cUn1sl6y4Whd&format=png&color=000000" class="w-auto h-6" />
             Master Data
         </a>
-          
+
         </div>
 
         <!-- Tire Request -->
@@ -38,7 +38,7 @@
           <div id="requestDropdown" class="absolute z-10 hidden w-full mt-2 text-black bg-white shadow-lg dropdown-animation rounded-xl">
             <a href="{{ route('tirerequest.new') }}" class="block px-4 py-2 hover:bg-gray-100">Tire Request</a>
             <a href="{{ route('tirerequest.approval') }}" class="block px-4 py-2 hover:bg-gray-100">Approval</a>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tire Receipt</a>
+            <a href="{{ route('tirereceipt.userlist') }}" class="block px-4 py-2 hover:bg-gray-100">Tire Receipt</a>
             <a href="#" class="block px-4 py-2 hover:bg-gray-100">User Inquiry</a>
           </div>
         </div>
@@ -73,7 +73,7 @@
       </div>
     </div>
   </main>
-  
+
   <!-- Custom JavaScript -->
   <script src="{{ asset('assets/js/script.js') }}"></script>
 

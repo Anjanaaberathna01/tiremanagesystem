@@ -21,7 +21,7 @@
         <div class="relative flex flex-col items-center p-6 text-white bg-center bg-cover " style="background-image: url('{{ asset('assets/images/tire1.jpg') }}');">
             <!-- Dark overlay -->
             <div class="absolute inset-0 bg-black bg-opacity-10"></div>
-        
+
             <!-- Centered content -->
             <div class="relative z-10 max-w-md p-6 rounded-xl">
                 <h2 class="pt-4 mb-12 text-4xl font-bold text-center">User Login</h2>

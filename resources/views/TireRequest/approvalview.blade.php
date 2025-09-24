@@ -38,7 +38,7 @@
               <label class="mb-1 text-sm font-medium sm:w-1/3 sm:mb-0">Vehicle Number</label>
               <input type="text" class="flex-1 px-4 py-2 bg-gray-200 rounded-full" value="{{ $request->vehicle->vehicle_number ?? '' }}" readonly />
             </div>
-            
+
             <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
               <label class="mb-1 text-sm font-medium sm:w-1/3 sm:mb-0">Vehicle Brand</label>
               <input type="text" class="flex-1 px-4 py-2 bg-gray-200 rounded-full" value="{{ $request->vehicle->brand ?? '' }}" readonly />

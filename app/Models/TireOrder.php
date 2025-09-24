@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 class TireOrder extends Model
 {
     protected $fillable = [
-        'tire_request_id', 'supplier_id', 'order_status', 'order_date', 'ordered_at', 'arrived_at'
+        'tire_request_id',
+        'supplier_id',
+        'order_status',
+        'order_date',
+        'ordered_at',
+        'arrived_at'
     ];
 
     public function request()
@@ -17,5 +22,11 @@ class TireOrder extends Model
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+    // Relationship to TireRequest for receipt and order views
+    public function tireRequest()
+    {
+        return $this->belongsTo(TireRequest::class, 'tire_request_id');
     }
 }

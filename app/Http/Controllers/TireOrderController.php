@@ -39,23 +39,44 @@ class TireOrderController extends Controller
     }
 
     // List all orders
+
     public function index()
     {
-        $orders = TireOrder::with(['request.vehicle', 'request.user', 'supplier'])->orderByDesc('created_at')->get();
+        $orders = TireOrder::with(['tireRequest.vehicle', 'tireRequest.user', 'supplier'])->orderByDesc('created_at')->get();
         return view('Order.index', compact('orders'));
     }
 
     // Mark as arrived and notify user
     public function markArrived($order_id)
     {
-        $order = TireOrder::with('request.user')->findOrFail($order_id);
+        $order = TireOrder::with('tireRequest.user')->findOrFail($order_id);
         $order->order_status = 'arrived';
         $order->arrived_at = now();
         $order->save();
 
         // Send email to user
-        Mail::to($order->request->user->email)->send(new TireArrivedNotification($order));
+        if ($order->tireRequest && $order->tireRequest->user) {
+            Mail::to($order->tireRequest->user->email)->send(new TireArrivedNotification($order));
+        }
 
         return redirect()->route('order.list')->with('success', 'Order marked as arrived and user notified!');
+    }
+    // Show all tire receipts for the logged-in user
+    public function userReceipts()
+    {
+        $orders = TireOrder::whereHas('tireRequest', function ($q) {
+            $q->where('user_id', auth()->id());
+        })->latest()->get();
+        return view('TireRequest.tirereceiptlist', compact('orders'));
+    }
+    // Show a single tire order receipt
+    public function showReceipt($order_id)
+    {
+        $order = TireOrder::with(['tireRequest.vehicle', 'tireRequest.user'])->findOrFail($order_id);
+        // Only allow the user who made the request to view the receipt
+        if (auth()->id() !== optional($order->tireRequest)->user_id) {
+            abort(403, 'Unauthorized access to this receipt.');
+        }
+        return view('TireRequest.tirereceipt', compact('order'));
     }
 }
